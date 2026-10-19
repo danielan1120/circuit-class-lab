@@ -1,0 +1,126 @@
+{
+  "version": "6",
+  "dialect": "sqlite",
+  "id": "d0e350fd-4928-4f7e-bd30-9fc0201d7c63",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "tables": {
+    "graphs": {
+      "name": "graphs",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "room": {
+          "name": "room",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "group_number": {
+          "name": "group_number",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "experiment": {
+          "name": "experiment",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "image_key": {
+          "name": "image_key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "mime_type": {
+          "name": "mime_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "note": {
+          "name": "note",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "''"
+        },
+        "delete_token_hash": {
+          "name": "delete_token_hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "graphs_room_group_experiment_unique": {
+          "name": "graphs_room_group_experiment_unique",
+          "columns": [
+            "room",
+            "group_number",
+            "experiment"
+          ],
+          "isUnique": true
+        },
+        "graphs_room_index": {
+          "name": "graphs_room_index",
+          "columns": [
+            "room"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "graphs_group_valid": {
+          "name": "graphs_group_valid",
+          "value": "\"graphs\".\"group_number\" BETWEEN 1 AND 6"
+        },
+        "graphs_experiment_valid": {
+          "name": "graphs_experiment_valid",
+          "value": "\"graphs\".\"experiment\" IN ('voltage', 'resistance')"
+        },
+        "graphs_mime_valid": {
+          "name": "graphs_mime_valid",
+          "value": "\"graphs\".\"mime_type\" IN ('image/jpeg', 'image/png', 'image/webp')"
+        },
+        "graphs_note_length": {
+          "name": "graphs_note_length",
+          "value": "length(\"graphs\".\"note\") <= 500"
+        }
+      }
+    }
+  },
+  "views": {},
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "indexes": {}
+  }
+}
